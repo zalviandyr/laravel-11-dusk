@@ -22,6 +22,7 @@
         <tr>
           <th>Title</th>
           <th>Synopsis</th>
+          <th>Author</th>
           <th>Created At</th>
           <th>Action</th>
         </tr>
@@ -31,6 +32,7 @@
           <tr>
             <td>{{ $book->title }}</td>
             <td>{{ $book->synopsis }}</td>
+            <td>{{ $book->author->name }}</td>
             <td>{{ $book->created_at }}</td>
             <td>
               <a href="{{ route('book.edit', $book->id) }}" class="btn btn-primary">Edit</a>

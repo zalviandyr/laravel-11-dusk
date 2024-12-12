@@ -17,7 +17,7 @@ class BookService
 
     public function getLatest(): Collection
     {
-        return $this->book->newQuery()->latest()->get();
+        return $this->book->newQuery()->with('author')->latest()->get();
     }
 
     public function get(string $id): Book
