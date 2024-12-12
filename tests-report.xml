@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="PHPUnit tests">
+  <testsuite name="" tests="2" assertions="3" errors="0" failures="0" skipped="0" time="3.362125">
+    <testsuite name="Tests\Feature\ExampleTest" file="tests/Feature/ExampleTest.php" tests="1" assertions="2" errors="0" failures="0" skipped="0" time="3.065494">
+      <testcase name="it data_get from array of object" class="Tests\Feature\ExampleTest" classname="Tests.Feature.ExampleTest" file="tests/Feature/ExampleTest.php::it data_get from array of object" line="0" assertions="2" time="3.065494"/>
+    </testsuite>
+    <testsuite name="Tests\Unit\ExampleTest" file="tests/Unit/ExampleTest.php" tests="1" assertions="1" errors="0" failures="0" skipped="0" time="0.296631">
+      <testcase name="it returns a true" class="Tests\Unit\ExampleTest" classname="Tests.Unit.ExampleTest" file="tests/Unit/ExampleTest.php::it returns a true" line="0" assertions="1" time="0.296631"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

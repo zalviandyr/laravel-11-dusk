@@ -17,3 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Test Report
+coverage-report.xml
+javan-codecov-win.exe
