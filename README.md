@@ -54,3 +54,19 @@
 -   `Book`, untuk berkomunikasi dengan table `books` pada database. Terdapat 1 method.
 
     1. author(), relasi antar model `Book` dan `User` berdasarkan column `author_id`
+
+## Testing
+
+### Preperation
+
+-   Buat database `testing.sqlite` dengan menggunakan perintah
+    ```
+    php artisan migrate --database=testing
+    ```
+
+### Run a test
+
+-   Cara menjalankan run yaitu dengan perintah
+    ```
+    php artisan dusk
+    ```

@@ -27,7 +27,7 @@ class BookService
 
     public function store(StoreRequest $storeRequest): void
     {
-        $data = $storeRequest->toArray();
+        $data = $storeRequest->safe()->toArray();
 
         $this->book->newQuery()->create($data);
     }
@@ -35,7 +35,7 @@ class BookService
     public function update(StoreRequest $storeRequest, string $id): void
     {
         $book = $this->get($id);
-        $data = $storeRequest->toArray();
+        $data = $storeRequest->safe()->toArray();
 
         $book->newQuery()->update($data);
     }
