@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Book\StoreRequest;
 use App\Models\Book;
-use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -28,13 +28,8 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'synopsis' => 'required',
-        ]);
-
         Book::create($request->toArray());
 
         return redirect()->route('book.index')->with('success', 'Success add book');
@@ -51,13 +46,8 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Book $book)
+    public function update(StoreRequest $request, Book $book)
     {
-        $request->validate([
-            'title' => 'required',
-            'synopsis' => 'required',
-        ]);
-
         $book->update($request->all());
 
         return redirect()->route('book.index')->with('success', 'Success edit book');

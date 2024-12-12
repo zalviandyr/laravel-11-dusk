@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,16 +17,10 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-         // Validasi input
-         $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
-
         // Attempt login
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($request)) {
             // Regenerate session to prevent session fixation attacks
             $request->session()->regenerate();
 
@@ -44,19 +40,8 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        // Validasi input
-        $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-
          // Buat pengguna baru
          User::create([
             'name' => $request->name,
