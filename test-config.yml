@@ -1,0 +1,8 @@
+cache:
+  paths:
+    - /root/.config/composer
+test:
+  image: harbor.merapi.javan.id/tools/javanlabs-php8.2-pcov:latest
+  script:
+    - composer install
+    - php -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" ./vendor/bin/pest --parallel --coverage-text --coverage-clover=coverage-report.xml --log-junit=tests-report.xml

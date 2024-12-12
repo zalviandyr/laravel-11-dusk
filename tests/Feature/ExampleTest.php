@@ -1,19 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+it('data_get from array of object', function () {
+    $chars = [
+        ['value' => 'A'],
+        ['value' => 'B'],
+    ];
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
-
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-}
+    expect(data_get($chars, '0.value'))->toBe('A');
+    expect(data_get($chars, '1.value'))->toBe('B');
+});
