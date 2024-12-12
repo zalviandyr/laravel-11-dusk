@@ -64,7 +64,15 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Redirect ke halaman login atau dashboard
+        // Redirect ke halaman login
         return redirect()->route('auth.loginForm')->with('success', 'Registration successful. Please login.');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        // Redirect ke halaman login
+        return redirect()->route('auth.loginForm')->with('success', 'Bye bye.');
     }
 }

@@ -9,7 +9,13 @@
     @endif
 
     <h1>List Book</h1>
-    <a href="{{ route('book.create') }}" class="btn btn-primary mb-3">Add Book</a>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <a href="{{ route('book.create') }}" class="btn btn-primary">Add Book</a>
+      <form action="{{ route('auth.logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-danger">Logout</button>
+      </form>
+    </div>
 
     <table class="table">
       <thead>
