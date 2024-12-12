@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    protected UserService $service;
+
+    public function __construct()
+    {
+        $this->service = new UserService();
+    }
+
     public function loginForm()
     {
         return view('auth.login');
@@ -44,12 +52,7 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-         // Buat pengguna baru
-         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $this->service->store($request);
 
         // Redirect ke halaman login
         return redirect()->route('auth.loginForm')->with('success', 'Registration successful. Please login.');

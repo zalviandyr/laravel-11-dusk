@@ -3,67 +3,59 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Book\StoreRequest;
-use App\Models\Book;
-use App\Models\User;
+use App\Services\BookService;
+use App\Services\UserService;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    protected BookService $service;
+    protected UserService $userService;
+
+    public function __construct()
+    {
+        $this->service = new BookService();
+        $this->userService = new UserService();
+    }
+
     public function index()
     {
-        $books = Book::latest()->get();
+        $books = $this->service->getLatest();
 
         return view('book.index', compact('books'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $users = User::all();
+        $users = $this->userService->getLatest();
 
         return view('book.create', compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreRequest $request)
     {
-        Book::create($request->toArray());
+        $this->service->store($request);
 
         return redirect()->route('book.index')->with('success', 'Success add book');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Book $book)
+    public function edit(string $id)
     {
-        $users = User::all();
+        $users = $this->userService->getLatest();
+        $book = $this->service->get($id);
 
         return view('book.edit', compact('book', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(StoreRequest $request, Book $book)
+    public function update(StoreRequest $request, string $id)
     {
-        $book->update($request->all());
+        $this->service->update($request, $id);
 
         return redirect()->route('book.index')->with('success', 'Success edit book');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Book $book)
+    public function destroy(string $id)
     {
-        $book->delete();
+        $this->service->destroy($id);
 
         return redirect()->route('book.index')->with('success', 'Success delete book');
     }
