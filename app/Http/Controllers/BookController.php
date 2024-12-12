@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Book\StoreRequest;
 use App\Models\Book;
+use App\Models\User;
 
 class BookController extends Controller
 {
@@ -22,7 +23,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.create');
+        $users = User::all();
+
+        return view('book.create', compact('users'));
     }
 
     /**
@@ -40,7 +43,9 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('book.edit', compact('book'));
+        $users = User::all();
+
+        return view('book.edit', compact('book', 'users'));
     }
 
     /**

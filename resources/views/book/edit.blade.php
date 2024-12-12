@@ -27,6 +27,16 @@
           <textarea class="form-control" id="synopsis" name="synopsis" rows="3" required>{{ old('synopsis', $book->synopsis) }}</textarea>
         </div>
 
+        <div class="mb-3">
+          <label for="author_id" class="form-label">Author</label>
+          <select class="form-control" id="author_id" name="author_id">
+            <option value="" selected disabled></option>
+            @foreach ($users as $user)
+              <option value="{{ $user->id }}" @if ($user->id == $book->author_id) selected @endif>{{ $user->name }}</option>
+            @endforeach
+          </select>
+        </div>
+
         <button type="submit" class="btn btn-primary w-100">Save</button>
       </form>
     </div>

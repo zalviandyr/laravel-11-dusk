@@ -11,6 +11,7 @@ class StoreRequest extends FormRequest
         return [
             'title' => ['required'],
             'synopsis' => ['required'],
+            'author_id' => ['required', 'exists:users,id'],
         ];
     }
 }
