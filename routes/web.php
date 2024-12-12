@@ -14,4 +14,4 @@ Route::get('/register', [AuthController::class, 'registerForm'])->name('auth.reg
 Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 
 // Book
-Route::resource('book', BookController::class)->middleware('auth');
+Route::resource('book', BookController::class)->middleware('auth')->except('show');

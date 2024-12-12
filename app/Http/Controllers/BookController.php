@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -11,7 +12,9 @@ class BookController extends Controller
      */
     public function index()
     {
-        return view('book.index');
+        $books = Book::latest()->get();
+
+        return view('book.index', compact('books'));
     }
 
     /**
@@ -19,7 +22,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        return view('book.create');
     }
 
     /**
@@ -27,38 +30,46 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'title' => 'required',
+            'synopsis' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        Book::create($request->toArray());
+
+        return redirect()->route('book.index')->with('success', 'Success add book');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Book $book)
     {
-        //
+        return view('book.edit', compact('book'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'synopsis' => 'required',
+        ]);
+
+        $book->update($request->all());
+
+        return redirect()->route('book.index')->with('success', 'Success edit book');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return redirect()->route('book.index')->with('success', 'Success delete book');
     }
 }
