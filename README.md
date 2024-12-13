@@ -73,6 +73,10 @@
 ### Run a test
 
 -   Cara menjalankan run yaitu dengan perintah
+
     ```
     php artisan dusk
     ```
+
+-   Berikut hasilnya
+    ![coverage](storage/docs/Screenshot%202024-12-13%20100316.png)
