@@ -59,6 +59,12 @@
 
 ### Preperation
 
+-   Install chrome driver
+
+    ```
+    php artisan dusk:chrome-driver
+    ```
+
 -   Buat database `testing.sqlite` dengan menggunakan perintah
     ```
     php artisan migrate --database=testing
