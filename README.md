@@ -59,6 +59,12 @@
 
 ### Preperation
 
+-   Edit file `.env.dusk` dan sesuaikan `APP_URL`, sebagai contoh
+
+    ```
+    APP_URL=http://laravel-11-dusk.test
+    ```
+
 -   Install chrome driver
 
     ```
